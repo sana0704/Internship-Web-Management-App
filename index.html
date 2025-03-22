@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            margin: 5px 0;
+            padding: 10px;
+            width: 90%;
+        }
+
+        button{
+           width: 60%; 
+           height: 50px;
+           border-radius: 10px;
+           cursor: pointer;
+           background-color: #D3E671;
+           margin-top: 20px;
+           color: navy;
+           font-size:larger;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        .btn-delete {
+            background-color: red;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Internship Management</h2>
+        <input type="text" id="company" placeholder="Company Name">
+        <input type="text" id="role" placeholder="Role">
+        <input type="date" id="startDate">
+        <input type="date" id="endDate">
+       ,<center> <button onclick="addInternship()">Add Internship</button></center>
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Role</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="internshipList"></tbody>
+        </table>
+    </div>
+    <script>
+        function addInternship() {
+            let company = document.getElementById("company").value;
+            let role = document.getElementById("role").value;
+            let startDate = document.getElementById("startDate").value;
+            let endDate = document.getElementById("endDate").value;
+            
+            if (company && role && startDate && endDate) {
+                let table = document.getElementById("internshipList");
+                let row = table.insertRow();
+                row.innerHTML = `<td>${company}</td><td>${role}</td><td>${startDate}</td><td>${endDate}</td><td><button class='btn-delete' onclick='deleteRow(this)'>Delete</button></td>`;
+                
+                document.getElementById("company").value = "";
+                document.getElementById("role").value = "";
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+            } else {
+                alert("Please fill all fields");
+            }
+        }
+        
+        function deleteRow(btn) {
+            let row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
